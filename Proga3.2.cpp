@@ -5,8 +5,12 @@
 #include <locale.h>
 #include <Windows.h>
 
+struct Player {
+    char name[50];  // Имя плеера
+    int volume;     // Громкость
+};
+
 int main()
 {
-    
-}
 
+}
