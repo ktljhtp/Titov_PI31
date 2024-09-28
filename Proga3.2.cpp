@@ -5,6 +5,8 @@
 #include <locale.h>
 #include <Windows.h>
 
+//проверка гит
+
 struct Content {
     char title[100];  // Название трека/видео
     char artist[50];  // Исполнитель
