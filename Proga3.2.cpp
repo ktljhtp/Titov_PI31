@@ -14,7 +14,6 @@ struct Content {
 
 struct Playlist {
     char name[50];  // Имя плейлиста
-    struct Content* tracks[100];  // Массив указателей на контент
     int trackCount;  // Количество треков
 };
 
@@ -43,6 +42,12 @@ struct Device {
 struct PlaylistSettings {
     int shuffle;          // Включен ли режим случайного воспроизведения (1 — да, 0 — нет)
     int repeat;           // Включен ли режим повтора (1 — да, 0 — нет)
+};
+
+struct TrackProgress {
+    float currentTime;  // Текущее время воспроизведения в секундах
+    float totalTime;    // Общее время трека в секундах
+    int isPlaying;      // Флаг воспроизведения (1 — воспроизводится, 0 — пауза)
 };
 
 int main()
