@@ -18,12 +18,14 @@ struct Playlist {
     int trackCount;  // Количество треков
 };
 
-
 struct AudioSettings {
     int volume;              // Уровень громкости (0 - 100)
+    int balance;             // Баланс между левым и правым каналом (-50 до +50)
+};
+
+struct Equalizer {
     int bassLevel;           // Уровень басов (-10 до +10)
     int trebleLevel;         // Уровень высоких частот (-10 до +10)
-    int balance;             // Баланс между левым и правым каналом (-50 до +50)
 };
 
 struct User {
