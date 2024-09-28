@@ -5,11 +5,6 @@
 #include <locale.h>
 #include <Windows.h>
 
-struct Player {
-    char name[50];  // Имя плеера
-    int volume;     // Громкость
-};
-
 struct Content {
     char title[100];  // Название трека/видео
     char artist[50];  // Исполнитель
@@ -23,10 +18,6 @@ struct Playlist {
     int trackCount;  // Количество треков
 };
 
-struct Effect {
-    char effectName[30];  // Название эффекта (например, "Bass Boost")
-    float intensity;      // Интенсивность эффекта
-};
 
 struct AudioSettings {
     int volume;              // Уровень громкости (0 - 100)
@@ -50,7 +41,6 @@ struct Device {
 struct PlaylistSettings {
     int shuffle;          // Включен ли режим случайного воспроизведения (1 — да, 0 — нет)
     int repeat;           // Включен ли режим повтора (1 — да, 0 — нет)
-    char playlistName[50]; // Название текущего плейлиста
 };
 
 int main()
