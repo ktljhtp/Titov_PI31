@@ -10,6 +10,15 @@ struct Player {
     int volume;     // Громкость
 };
 
+struct Content {
+    char title[100];  // Название трека/видео
+    char artist[50];  // Исполнитель
+    float duration;   // Продолжительность в секундах
+    char format[10];  // Формат (например, MP3)
+};
+
+
+
 int main()
 {
 
