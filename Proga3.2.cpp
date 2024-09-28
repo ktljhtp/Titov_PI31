@@ -17,7 +17,16 @@ struct Content {
     char format[10];  // Формат (например, MP3)
 };
 
+struct Playlist {
+    char name[50];  // Имя плейлиста
+    struct Content* tracks[100];  // Массив указателей на контент
+    int trackCount;  // Количество треков
+};
 
+struct Effect {
+    char effectName[30];  // Название эффекта (например, "Bass Boost")
+    float intensity;      // Интенсивность эффекта
+};
 
 int main()
 {
