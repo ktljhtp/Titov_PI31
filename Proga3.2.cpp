@@ -5,7 +5,7 @@
 #include <Windows.h>
 
 struct Content {
-    char title[100];  // Название трека/видео
+    char title[100];  // Название трека
     char artist[50];  // Исполнитель
     float duration;   // Продолжительность в секундах
     char format[10];  // Формат (например, MP3)
@@ -28,10 +28,28 @@ struct Device {
     int currentVolume;      // Текущая громкость устройства
 };
 
+struct Equalizer {
+    int bass;      // Уровень низких частот (-10 до +10)
+    int mid;       // Уровень средних частот (-10 до +10)
+    int treble;    // Уровень высоких частот (-10 до +10)
+};
+
+struct PlaylistSettings {
+    int shuffle;  // Включен ли режим случайного воспроизведения (1 — да, 0 — нет)
+    int repeat;   // Включен ли режим повторного воспроизведения (1 — да, 0 — нет)
+};
+
+struct TrackProgress {
+    float currentTime;  // Текущее время воспроизведения в секундах
+    float totalTime;    // Общее время трека в секундах
+    int isPlaying;      // Флаг воспроизведения (1 — воспроизводится, 0 — пауза)
+};
+
 struct User {
     char username[50];               // Имя пользователя
     struct AudioSettings audioSettings;  // Настройки аудио
     struct Device device;               // Устройство пользователя
+    struct Equalizer equalizer;         // Настройки эквалайзера
     char preferredCodec[10];            // Предпочтительный аудиоформат
 };
 
@@ -62,6 +80,11 @@ void fill_user_data(struct User* user) {
     user->device.maxVolume = 100;
     user->device.currentVolume = 80;
     strcpy(user->preferredCodec, "MP3");
+
+    // Настройки эквалайзера
+    user->equalizer.bass = 5;
+    user->equalizer.mid = 0;
+    user->equalizer.treble = 7;
 }
 
 // Функция для вывода информации о плейлисте
@@ -74,12 +97,28 @@ void print_playlist_info(struct Playlist* myPlaylist) {
 
 // Функция для вывода информации о пользователе
 void print_user_info(struct User* user) {
-    printf("\nUser: %s\nPreferred Volume: %d\nDevice: %s (Current Volume: %d)\n", user->username, user->audioSettings.volume, user->device.deviceName, user->device.currentVolume);
+    printf("\nUser: %s\nPreferred Volume: %d\nDevice: %s (Current Volume: %d)\nEqualizer: Bass=%d, Mid=%d, Treble=%d\n",
+        user->username, user->audioSettings.volume, user->device.deviceName, user->device.currentVolume,
+        user->equalizer.bass, user->equalizer.mid, user->equalizer.treble);
+}
+
+// Функция для вывода настроек плейлиста
+void print_playlist_settings(struct PlaylistSettings* settings) {
+    printf("\nPlaylist Settings:\nShuffle: %s\nRepeat: %s\n",
+        settings->shuffle ? "On" : "Off", settings->repeat ? "On" : "Off");
+}
+
+// Функция для вывода текущего состояния трека
+void print_track_progress(struct TrackProgress* progress) {
+    printf("\nTrack Progress: %.2f/%.2f sec [%s]\n",
+        progress->currentTime, progress->totalTime, progress->isPlaying ? "Playing" : "Paused");
 }
 
 int main() {
     struct Playlist myPlaylist;
     struct User user;
+    struct PlaylistSettings playlistSettings;
+    struct TrackProgress trackProgress;
 
     // Добавляем треки в плейлист
     add_tracks_to_playlist(&myPlaylist);
@@ -87,9 +126,20 @@ int main() {
     // Заполняем данные пользователя
     fill_user_data(&user);
 
+    // Настройки плейлиста
+    playlistSettings.shuffle = 1;
+    playlistSettings.repeat = 0;
+
+    // Прогресс трека
+    trackProgress.currentTime = 60.0;
+    trackProgress.totalTime = 180.0;
+    trackProgress.isPlaying = 1;
+
     // Выводим информацию о плейлисте и пользователе
     print_playlist_info(&myPlaylist);
     print_user_info(&user);
+    print_playlist_settings(&playlistSettings);
+    print_track_progress(&trackProgress);
 
     return 0;
 }
