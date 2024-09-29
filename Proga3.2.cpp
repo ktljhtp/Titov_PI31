@@ -68,20 +68,13 @@ void fill_user_data(struct User* user) {
 void print_playlist_info(struct Playlist* myPlaylist) {
     printf("Playlist: %s\n", myPlaylist->name);
     for (int i = 0; i < myPlaylist->trackCount; i++) {
-        printf("Track %d: %s by %s (Duration: %.2f sec, Format: %s)\n",
-            i + 1,
-            myPlaylist->tracks[i].title,
-            myPlaylist->tracks[i].artist,
-            myPlaylist->tracks[i].duration,
-            myPlaylist->tracks[i].format);
+        printf("Track %d: %s by %s (Duration: %.2f sec, Format: %s)\n", i + 1, myPlaylist->tracks[i].title, myPlaylist->tracks[i].artist, myPlaylist->tracks[i].duration, myPlaylist->tracks[i].format);
     }
 }
 
 // Функция для вывода информации о пользователе
 void print_user_info(struct User* user) {
-    printf("\nUser: %s\n", user->username);
-    printf("Preferred Volume: %d\n", user->audioSettings.volume);
-    printf("Device: %s (Current Volume: %d)\n", user->device.deviceName, user->device.currentVolume);
+    printf("\nUser: %s\nPreferred Volume: %d\nDevice: %s (Current Volume: %d)\n", user->username, user->audioSettings.volume, user->device.deviceName, user->device.currentVolume);
 }
 
 int main() {
